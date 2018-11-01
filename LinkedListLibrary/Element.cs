@@ -4,15 +4,16 @@ namespace LinkedListLibrary
 {
     public class Element
     {
-        private int data;
+        /// <summary>
+        /// Value of the element
+        /// </summary>
+        public int Data { get; set; }
 
-        public int Data
-        {
-            get { return data; }
-            set { data = value; }
-        }
-
+        /// <summary>
+        /// Reference to the next element
+        /// </summary>
         public Element Next { get; set; }
+
 
         public Element(int data, Element next)
         {
@@ -23,7 +24,7 @@ namespace LinkedListLibrary
         public Element()
         {
             Random rnd = new Random();
-            Data = rnd.Next(0, 100);   // creates a number between 1 and 6
+            Data = rnd.Next(0, 100);   // creates a number between 0 and 99
             Next = null;
         }
     }

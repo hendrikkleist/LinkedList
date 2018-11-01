@@ -26,18 +26,14 @@ namespace LinkedListLibrary
         /// <param name="element">Used to add to the list</param>
         public void AddFirst(Element element)
         {
-            // Check if Element is empty
-            if (First == null)
-            {
-                // Sets the first element
-                First = element;
-            } else
+            // Check if Element is not empty
+            if (First != null)
             {
                 // Sets the Next element
                 element.Next = First;
-                // Sets the First element
-                First = element;
             }
+            // Sets the First element
+            First = element;
         }
 
         /// <summary>
@@ -45,16 +41,13 @@ namespace LinkedListLibrary
         /// </summary>
         public void RemoveFirst()
         {
-            // Check if Element is empty
-            if (First == null)
-            {
-                Console.WriteLine("Ingen Data i linkedlist");
-            } else
-            {
+            // Check if Element is not empty
+            if (First != null)
+            { 
                 // Sets the next Element as First Element
                 // Garbage collector will make sure to delete unused Element
                 First = First.Next;
-            }
+            } 
         }
 
         /// <summary>
@@ -67,30 +60,13 @@ namespace LinkedListLibrary
             // Otherwise it will be destructive count
             Element localFirst = First;
             int counter = 0;
-            bool end = false;
-            while (!end)
+            while (localFirst != null)
             {
-                // If localFirst is empty, there are no elements in the list
-                if (localFirst == null)
-                {
-                    end = true;
-                }
-                else
-                {
-                    // There are element(s) in the list, increment counter with 1
-                    counter++;
-                    // See if there's an next element in the first element
-                    if (localFirst.Next == null)
-                    {
-                        // We are at the end of the list
-                        end = true;
-                    }
-                    else
-                    {
-                        // Set the next element as first element
-                        localFirst = localFirst.Next;
-                    }
-                }
+                // There are element(s) in the list, increment counter with 1
+                counter++;
+                
+                // Set the next element as first element
+                localFirst = localFirst.Next;
             }
             return counter;
         }
@@ -105,30 +81,13 @@ namespace LinkedListLibrary
             // Otherwise it will be destructive print
             Element localFirst = First;
             string result = "";
-            bool end = false;
-            while (!end)
+            while (localFirst != null)
             {
-                // If localFirst is empty, there are no elements in the list
-                if (localFirst == null)
-                {
-                    // We are at the end of the list
-                    end = true;
-                }
-                else
-                {
-                    // There are element(s) in the list, add the data to the result
-                    result += localFirst.Data.ToString() + "\n";
-                    if (localFirst.Next == null)
-                    {
-                        // We are at the end of the list
-                        end = true;
-                    }
-                    else
-                    {
-                        // Set the next element as first element
-                        localFirst = localFirst.Next;
-                    }
-                }
+                // There are element(s) in the list, add the data to the result
+                result += localFirst.Data.ToString() + "\n";
+
+                // Set the next element as first element
+                localFirst = localFirst.Next;
             }
             return result;
         }
@@ -138,38 +97,38 @@ namespace LinkedListLibrary
         /// </summary>
         public void Sort()
         {
-            // Make a reference to the First element.
-            
+            bool swapped;
+
+            // Will be used to loop through the list
             int linkedCount = Count();
             
             for (int i = 0; i < linkedCount; i++)
             {
+                swapped = false;
+                // Make a reference to the First element.   
                 // Otherwise it will be destructive sort
                 Element localFirst = First;
-                bool end = false;
-                while (!end)
+                while (localFirst != null)
                 {
-                    if (localFirst == null)
+                    // See if there's an next element in the first element
+                    if (localFirst.Next != null)
                     {
-                        end = true;
-                    }
-                    else
-                    {
-                        if (localFirst.Next == null)
+                        // Swap numbers if first number is bigger than the other.
+                        if (localFirst.Data > localFirst.Next.Data)
                         {
-                            end = true;
-                        }
-                        else
-                        {
-                            if (localFirst.Data > localFirst.Next.Data)
-                            {
-                                int temp = localFirst.Next.Data;
-                                localFirst.Next.Data = localFirst.Data;
-                                localFirst.Data = temp;
-                            }
-                            localFirst = localFirst.Next;
+                            // Store Next.Data to temp
+                            int temp = localFirst.Next.Data;
+                            localFirst.Next.Data = localFirst.Data;
+                            localFirst.Data = temp;
+                            swapped = true;
                         }
                     }
+                    // Set the next element as first element
+                    localFirst = localFirst.Next;
+                }
+                if (!swapped)
+                {
+                    break;
                 }
             }
         }

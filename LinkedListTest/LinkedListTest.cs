@@ -21,9 +21,11 @@ namespace LinkedListTest
 
             // Act
             linkedList.AddFirst(element1);
-
+            int actual = linkedList.First.Data;
+            
             // Assert
-            Assert.AreEqual<int>(element1.Data, linkedList.First.Data);
+            int expected = element1.Data;
+            Assert.AreEqual<int>(expected, actual);
         }
 
         [TestMethod]
@@ -94,21 +96,23 @@ namespace LinkedListTest
         {
             // Arrange
             LinkedList linkedList = new LinkedList();
-            Element element4 = new Element();
-            element4.Data = 7;
-            linkedList.AddFirst(element4);
+            Element e4 = new Element();
+            e4.Data = 1;
+            linkedList.AddFirst(e4);
 
-            Element element3 = new Element();
-            element3.Data = 2;
-            linkedList.AddFirst(element3);
+            Element e3 = new Element();
+            e3.Data = 2;
+            linkedList.AddFirst(e3);
 
-            Element element2 = new Element();
-            element2.Data = 1;
-            linkedList.AddFirst(element2);
+            Element e2 = new Element();
+            e2.Data = 7;
+            linkedList.AddFirst(e2);
 
-            Element element1 = new Element();
-            element1.Data = 10;
-            linkedList.AddFirst(element1);
+            Element e1 = new Element();
+            e1.Data = 10;
+            linkedList.AddFirst(e1);
+
+
 
             // Act
             linkedList.Sort();
